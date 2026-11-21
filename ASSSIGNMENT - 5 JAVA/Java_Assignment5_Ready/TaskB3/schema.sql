@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS buspass_db;
+USE buspass_db;
+CREATE TABLE IF NOT EXISTS bus_pass(
+ pass_id VARCHAR(20) PRIMARY KEY,
+ reg_no VARCHAR(20) NOT NULL,
+ name VARCHAR(100) NOT NULL,
+ route_no INT NOT NULL CHECK(route_no>0),
+ amount DECIMAL(10,2) NOT NULL CHECK(amount>=0)
+);
+CREATE TABLE IF NOT EXISTS app_user(
+ user_id VARCHAR(50) PRIMARY KEY,
+ password_text VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS wallet(
+ wallet_id INT PRIMARY KEY,
+ balance DECIMAL(12,2) NOT NULL CHECK(balance>=0)
+);
+INSERT INTO app_user VALUES('student1','demo-pass')
+ON DUPLICATE KEY UPDATE password_text=VALUES(password_text);
+INSERT INTO wallet VALUES(1,5000.00) ON DUPLICATE KEY UPDATE balance=VALUES(balance);
+INSERT INTO wallet VALUES(2,1000.00) ON DUPLICATE KEY UPDATE balance=VALUES(balance);
