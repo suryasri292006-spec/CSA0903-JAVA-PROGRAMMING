@@ -1,0 +1,18 @@
+ALGORITHM FeeWindowPayAction
+INPUT register number and amount text
+CALL FeeService.pay(register number, amount text)
+IF validation error THEN show input message
+ELSE IF database error THEN show database message
+ELSE display payment confirmation and receipt
+END IF
+END ALGORITHM
+
+ALGORITHM FeeServicePay
+IF register number is blank THEN reject
+CONVERT amount text to number; reject parse failure
+IF amount <= 0 or not finite THEN reject
+PREPARE parameterized INSERT statement
+BIND register number and amount
+EXECUTE update and close statement
+RETURN receipt text
+END ALGORITHM

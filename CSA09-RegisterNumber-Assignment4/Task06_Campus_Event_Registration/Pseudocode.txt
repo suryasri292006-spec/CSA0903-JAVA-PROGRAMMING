@@ -1,0 +1,20 @@
+ALGORITHM RegisterStudent
+READ student name, register number and selected event
+VALIDATE non-empty name and register number format
+IF invalid THEN show validation message and STOP
+RUN RegistrationService.register in SwingWorker background thread
+DAO executes parameterized INSERT
+DATABASE UNIQUE(register_number,event_id) prevents duplicate registration
+IF success THEN show confirmation and refresh JTable page
+ELSE show duplicate/database error
+END ALGORITHM
+
+ALGORITHM FilterRegistrations
+READ selected event filter and page number
+RUN DAO query in SwingWorker
+SELECT registration and event fields
+IF event filter is All THEN omit WHERE clause
+ELSE bind selected event ID
+BIND page size and offset to LIMIT and OFFSET
+RETURN rows and update JTable on event-dispatch thread
+END ALGORITHM
