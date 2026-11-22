@@ -1,0 +1,5 @@
+Finding the LAST parked vehicle on exit, 200 lookups per structure
+n         array scan       ArrayList scan   HashMap get      approx. extra memory of HashMap
+1000      26.25 ms         3.07 ms          0.052 ms         ~46 KB (table + entries, about 48 bytes per vehicle)  (sink 29400)
+10000     40.45 ms         113.60 ms        0.069 ms         ~468 KB (table + entries, about 48 bytes per vehicle)  (sink 29400)
+100000    362.08 ms        500.05 ms        0.057 ms         ~4687 KB (table + entries, about 48 bytes per vehicle)  (sink 29400)

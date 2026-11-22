@@ -1,0 +1,1 @@
+100000000 fee calculations: dynamic dispatch = 512 ms, instanceof chain = 200 ms (sink 1.60999998E10)

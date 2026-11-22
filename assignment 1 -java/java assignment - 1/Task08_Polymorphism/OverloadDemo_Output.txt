@@ -1,0 +1,14 @@
+fee(car, 130):
+  -> fee(Vehicle, int) selected at compile time
+  = 90.0
+fee(car, 09:00, 11:10):
+  -> fee(Vehicle, LocalTime, LocalTime) selected at compile time
+  = 90.0
+
+label(declared Vehicle holding a Car) = label(Vehicle)
+label(declared Car)                   = label(Car)
+
+Dynamic method dispatch trace for v.calculateFee(130):
+  declared type = Vehicle, actual type = TwoWheeler, calculateFee found in Vehicle, ratePerHour() executed in TwoWheeler -> Rs 30.0
+  declared type = Vehicle, actual type = Car, calculateFee found in Vehicle, ratePerHour() executed in Car -> Rs 90.0
+  declared type = Vehicle, actual type = ElectricCar, calculateFee found in Vehicle, ratePerHour() executed in Car -> Rs 90.0
