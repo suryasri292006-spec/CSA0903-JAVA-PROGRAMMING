@@ -1,0 +1,4 @@
+Worst case: all slots but the last are occupied, then allocate+release the last slot 200000 times
+1 x 20    slots=20   scan=  25 ms   stack+counts=  33 ms
+3 x 50    slots=150  scan=  36 ms   stack+counts=  13 ms
+5 x 100   slots=500  scan=  62 ms   stack+counts=  16 ms

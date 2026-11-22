@@ -1,0 +1,18 @@
+new TwoWheeler("TN01A1"):
+  [1] Vehicle(String) constructor ran for TN01A1
+  [2] TwoWheeler(String) constructor ran
+new Car("TN02B2"):
+  [1] Vehicle(String) constructor ran for TN02B2
+  [2] Car(String) constructor ran
+new ElectricCar("TN03C3"):
+  [1] Vehicle(String) constructor ran for TN03C3
+  [2] Car(String) constructor ran
+  [3] ElectricCar(String,int) constructor ran, battery=40
+  [4] ElectricCar(String) constructor ran
+
+Vehicle TN01A1 rate Rs 10.0/hour
+Vehicle TN02B2 rate Rs 30.0/hour, category Car
+Vehicle TN03C3 rate Rs 30.0/hour, category Car, electric, battery 40 kWh
+Inherited getRegNo() on ElectricCar: TN03C3
+e instanceof Car     : true
+e instanceof Vehicle : true
