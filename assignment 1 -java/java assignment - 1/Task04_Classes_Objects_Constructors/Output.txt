@@ -1,0 +1,11 @@
+CAR[UNKNOWN] | CAR[TN01AB1111] | EV[TN02CD2222] | EV[TN02CD2222]
+Ticket#1001 EV[TN02CD2222] slot=[0,1] entry=540
+Ticket#1002 CAR[TN01AB1111] slot=[-1,-1] entry=555
+Ticket#0 CAR[UNKNOWN] slot=[-1,-1] entry=0
+Ticket#1001 EV[TN02CD2222] slot=[0,1] entry=540
+t1 == alias     : true
+t1 == dup       : false
+same ticketNo   : true
+shared Vehicle? : false (copy constructor made a new Vehicle)
+
+Creating 2000000 tickets (ms): constructor=45, default+setters=25, static factory=29 (sink 5999997000000)
