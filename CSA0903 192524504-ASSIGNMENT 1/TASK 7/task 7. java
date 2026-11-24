@@ -1,0 +1,145 @@
+
+import java.util.Objects;
+
+class Vehicle {
+    private final String registrationNumber;
+    private String ownerName;
+
+    Vehicle(String registrationNumber, String ownerName) {
+        this.registrationNumber = registrationNumber;
+        this.ownerName = ownerName;
+    }
+
+    public final String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void displayDetails() {
+        System.out.println("Registration Number: " + registrationNumber);
+        System.out.println("Owner Name: " + ownerName);
+    }
+
+    public double calculateFee(int hours) {
+        return hours * 20.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{registrationNumber='" + registrationNumber
+                + "', ownerName='" + ownerName + "'}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Vehicle)) {
+            return false;
+        }
+
+        Vehicle other = (Vehicle) obj;
+
+        return registrationNumber.equalsIgnoreCase(
+                other.registrationNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return registrationNumber.toLowerCase().hashCode();
+    }
+}
+
+class Car extends Vehicle {
+    Car(String registrationNumber, String ownerName) {
+        super(registrationNumber, ownerName);
+    }
+
+    @Override
+    public double calculateFee(int hours) {
+        return hours * 30.0;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Vehicle Type: Car");
+        super.displayDetails();
+    }
+}
+
+class Bike extends Vehicle {
+    Bike(String registrationNumber, String ownerName) {
+        super(registrationNumber, ownerName);
+    }
+
+    @Override
+    public double calculateFee(int hours) {
+        return hours * 10.0;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Vehicle Type: Bike");
+        super.displayDetails();
+    }
+}
+
+class ElectricCar extends Car {
+    ElectricCar(String registrationNumber, String ownerName) {
+        super(registrationNumber, ownerName);
+    }
+
+    @Override
+    public double calculateFee(int hours) {
+        return hours * 25.0;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Vehicle Type: Electric Car");
+        super.displayDetails();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car("TN45AB1234", "Arun");
+        Vehicle bike = new Bike("TN45CD5678", "Kumar");
+        Vehicle electricCar =
+                new ElectricCar("TN45EF9012", "Priya");
+
+        int hours = 3;
+
+        System.out.println("Car Details:");
+        car.displayDetails();
+        System.out.println("Parking Fee: Rs. " +
+                car.calculateFee(hours));
+
+        System.out.println("\nBike Details:");
+        bike.displayDetails();
+        System.out.println("Parking Fee: Rs. " +
+                bike.calculateFee(hours));
+
+        System.out.println("\nElectric Car Details:");
+        electricCar.displayDetails();
+        System.out.println("Parking Fee: Rs. " +
+                electricCar.calculateFee(hours));
+
+        System.out.println("\nObject Methods:");
+
+        Vehicle vehicle1 =
+                new Vehicle("TN45XY1111", "Ravi");
+        Vehicle vehicle2 =
+                new Vehicle("tn45xy1111", "Kiran");
+
+        System.out.println(vehicle1);
+        System.out.println("Are vehicles equal? " +
+                vehicle1.equals(vehicle2));
+
+        System.out.println("Hash Code 1: " +
+                vehicle1.hashCode());
+        System.out.println("Hash Code 2: " +
+                vehicle2.hashCode());
+    }
+}

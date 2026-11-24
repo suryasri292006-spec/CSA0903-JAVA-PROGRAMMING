@@ -1,0 +1,107 @@
+
+class Vehicle {
+    protected String registrationNumber;
+    protected String ownerName;
+
+    Vehicle(String registrationNumber, String ownerName) {
+        this.registrationNumber = registrationNumber;
+        this.ownerName = ownerName;
+        System.out.println("Vehicle constructor called");
+    }
+
+    void displayDetails() {
+        System.out.println("Registration Number: " + registrationNumber);
+        System.out.println("Owner Name: " + ownerName);
+    }
+
+    double calculateFee(int hours) {
+        return hours * 20.0;
+    }
+}
+
+class Car extends Vehicle {
+    protected int numberOfSeats;
+
+    Car(String registrationNumber, String ownerName, int numberOfSeats) {
+        super(registrationNumber, ownerName);
+        this.numberOfSeats = numberOfSeats;
+        System.out.println("Car constructor called");
+    }
+
+    @Override
+    double calculateFee(int hours) {
+        return hours * 30.0;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Vehicle Type: Car");
+        System.out.println("Number of Seats: " + numberOfSeats);
+    }
+}
+
+class ElectricCar extends Car {
+    private int batteryCapacity;
+
+    ElectricCar(String registrationNumber, String ownerName,
+                int numberOfSeats, int batteryCapacity) {
+        super(registrationNumber, ownerName, numberOfSeats);
+        this.batteryCapacity = batteryCapacity;
+        System.out.println("ElectricCar constructor called");
+    }
+
+    @Override
+    double calculateFee(int hours) {
+        return hours * 25.0;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Battery Capacity: " + batteryCapacity + " kWh");
+    }
+}
+
+class Bike extends Vehicle {
+    Bike(String registrationNumber, String ownerName) {
+        super(registrationNumber, ownerName);
+        System.out.println("Bike constructor called");
+    }
+
+    @Override
+    double calculateFee(int hours) {
+        return hours * 10.0;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Vehicle Type: Bike");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Creating Electric Car:");
+        ElectricCar electricCar =
+            new ElectricCar("TN45AB1234", "Arun", 5, 60);
+
+        System.out.println("\nElectric Car Details:");
+        electricCar.displayDetails();
+
+        int hours = 3;
+        System.out.println("Parking Duration: " + hours + " hours");
+        System.out.println("Parking Fee: Rs. " +
+                           electricCar.calculateFee(hours));
+
+        System.out.println("\nCreating Bike:");
+        Bike bike = new Bike("TN45CD5678", "Kumar");
+
+        System.out.println("\nBike Details:");
+        bike.displayDetails();
+
+        System.out.println("Parking Fee: Rs. " +
+                           bike.calculateFee(hours));
+    }
+}

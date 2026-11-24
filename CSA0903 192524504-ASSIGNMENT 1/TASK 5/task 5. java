@@ -1,0 +1,207 @@
+
+class Vehicle {
+
+    String registrationNumber;
+    String type;
+
+    Vehicle(String registrationNumber, String type) {
+        this.registrationNumber = registrationNumber;
+        this.type = type;
+    }
+}
+
+// Class 1: ParkingTicket
+class ParkingTicket {
+
+    // Static variables shared by all ticket objects
+    static int nextTicketNumber;
+    static int totalTicketsIssued;
+
+    int ticketNumber;
+    Vehicle vehicle;
+    String facilityName;
+    int slotNumber;
+
+    // Static initialization block
+    static {
+        nextTicketNumber = 1000;
+        totalTicketsIssued = 0;
+
+        System.out.println("Ticket system initialized.");
+    }
+
+    // Parameterized constructor
+    ParkingTicket(Vehicle vehicle,
+                  String facilityName,
+                  int slotNumber) {
+
+        this.ticketNumber = nextTicketNumber++;
+        this.vehicle = vehicle;
+        this.facilityName = facilityName;
+        this.slotNumber = slotNumber;
+
+        totalTicketsIssued++;
+    }
+
+    void displayTicket() {
+
+        System.out.println("Ticket Number: " + ticketNumber);
+        System.out.println("Vehicle Number: "
+                + vehicle.registrationNumber);
+        System.out.println("Facility: " + facilityName);
+        System.out.println("Slot Number: " + slotNumber);
+    }
+
+    // Static method
+    static int getTotalTicketsIssued() {
+        return totalTicketsIssued;
+    }
+}
+
+// Class 2: ParkingFacility
+class ParkingFacility {
+
+    String facilityName;
+
+    // Static variable shared by all facilities
+    static int totalOccupiedSlots = 0;
+
+    // Instance variable
+    ParkingTicket[] slots;
+
+    ParkingFacility(String facilityName, int capacity) {
+
+        this.facilityName = facilityName;
+        slots = new ParkingTicket[capacity];
+    }
+
+    // Method receives Vehicle and returns ParkingTicket
+    ParkingTicket parkVehicle(Vehicle vehicle) {
+
+        for (int i = 0; i < slots.length; i++) {
+
+            if (slots[i] == null) {
+
+                ParkingTicket ticket =
+                        new ParkingTicket(
+                                vehicle,
+                                facilityName,
+                                i + 1
+                        );
+
+                slots[i] = ticket;
+
+                totalOccupiedSlots++;
+
+                System.out.println("\nVehicle parked successfully!");
+
+                return ticket;
+            }
+        }
+
+        System.out.println("No parking slot available.");
+        return null;
+    }
+
+    // Method receives a ParkingTicket object
+    void exitVehicle(ParkingTicket ticket) {
+
+        if (ticket == null) {
+            return;
+        }
+
+        int index = ticket.slotNumber - 1;
+
+        if (index >= 0 && index < slots.length
+                && slots[index] == ticket) {
+
+            slots[index] = null;
+
+            totalOccupiedSlots--;
+
+            System.out.println(
+                    "\nVehicle exited successfully."
+            );
+
+            System.out.println("Slot released.");
+        }
+    }
+
+    // Static method
+    static int getTotalOccupiedSlots() {
+        return totalOccupiedSlots;
+    }
+}
+
+// Main class
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("================================");
+        System.out.println(" CAMPUS SMART PARKING SYSTEM");
+        System.out.println("================================");
+
+        // Create two parking facilities
+        ParkingFacility north =
+                new ParkingFacility("North Gate", 2);
+
+        ParkingFacility south =
+                new ParkingFacility("South Gate", 2);
+
+        // Create vehicle objects
+        Vehicle v1 = new Vehicle("TN01AB1111", "Car");
+        Vehicle v2 = new Vehicle("TN02CD2222", "EV");
+
+        // Park vehicles
+        ParkingTicket ticket1 = north.parkVehicle(v1);
+
+        ParkingTicket ticket2 = south.parkVehicle(v2);
+
+        // Display ticket details
+        System.out.println("\n----- NORTH GATE TICKET -----");
+
+        if (ticket1 != null) {
+            ticket1.displayTicket();
+        }
+
+        System.out.println("\n----- SOUTH GATE TICKET -----");
+
+        if (ticket2 != null) {
+            ticket2.displayTicket();
+        }
+
+        // Display static information
+        System.out.println("\n----- PARKING SUMMARY -----");
+
+        System.out.println("Total Tickets Issued: "
+                + ParkingTicket.getTotalTicketsIssued());
+
+        System.out.println("Total Occupied Slots: "
+                + ParkingFacility.getTotalOccupiedSlots());
+
+        // Vehicle exits
+        north.exitVehicle(ticket1);
+
+        // Remove caller's reference after exit
+        ticket1 = null;
+
+        // Display updated occupancy
+        System.out.println("\nAfter North Gate Exit:");
+
+        System.out.println("Total Occupied Slots: "
+                + ParkingFacility.getTotalOccupiedSlots());
+
+        // Release second vehicle
+        south.exitVehicle(ticket2);
+
+        ticket2 = null;
+
+        System.out.println("\nAfter South Gate Exit:");
+
+        System.out.println("Total Occupied Slots: "
+                + ParkingFacility.getTotalOccupiedSlots());
+
+        System.out.println("\nProgram completed successfully.");
+    }
+}
