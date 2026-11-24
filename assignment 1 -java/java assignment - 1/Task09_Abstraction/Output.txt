@@ -1,5 +1,0 @@
-TwoWheeler TN01A1 parking fee=30.0, visitor pays=30.0, pass holder pays=0.0
-Car TN02B2 parking fee=90.0, visitor pays=90.0, pass holder pays=0.0
-ElectricCar TN03C3 parking fee=90.0, visitor pays=90.0, pass holder pays=0.0
-   charging valid? true, charging=120.0, with service charge=125.0
-Chargeable.isValidKwh(500) = false

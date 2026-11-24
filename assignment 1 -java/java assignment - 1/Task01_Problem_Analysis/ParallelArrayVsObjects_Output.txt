@@ -1,9 +1,0 @@
-Worst-case search (key is the LAST vehicle), 200 searches per size
-n         parallel arrays    object list        HashMap (extra)   
-1000      26.41 ms           35.98 ms           0.490 ms           (sink 599400)
-10000     111.89 ms          117.22 ms          0.425 ms           (sink 2543400)
-100000    156.67 ms          178.58 ms          10.370 ms          (sink 20255400)
-
-Adding a new attribute (e.g. ownerName):
-  parallel arrays : declare a new array, grow it everywhere, change every method that moves/deletes a vehicle
-  objects         : add ONE field to Vehicle; existing code keeps working

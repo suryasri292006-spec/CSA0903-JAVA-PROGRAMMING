@@ -1,4 +1,0 @@
-Comparison of Task11 source files with the copies inside Task12 (byte-by-byte, cmp):
-  17 existing .java files  -> 17 UNCHANGED, 0 CHANGED
-  5 NEW files: model/EBike.java, model/DeliveryVan.java, model/DayPass.java, app/ParkingApp12.java, app/TestRunner12.java
-Reproduce with:  ./check_unchanged.sh   (in the Task12_Design_Challenge folder)
